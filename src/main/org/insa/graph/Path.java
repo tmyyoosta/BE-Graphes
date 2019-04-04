@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 /**
  * <p>
  * Class representing a path between nodes in a graph.
@@ -213,8 +214,11 @@ public class Path {
      * @deprecated Need to be implemented.
      */
     public float getLength() {
-        // TODO:
-        return 0;
+        float longueurTotale = 0;
+        for (int i=0; i < arcs.size(); i++) {
+        	longueurTotale += arcs.get(i).getLength();
+        }
+        return longueurTotale;
     }
 
     /**
@@ -228,8 +232,9 @@ public class Path {
      * @deprecated Need to be implemented.
      */
     public double getTravelTime(double speed) {
-        // TODO:
-        return 0;
+        float longueur = this.getLength();
+        double temps = longueur / (speed/3.6) ; 
+        return temps;
     }
 
     /**
