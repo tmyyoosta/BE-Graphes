@@ -266,8 +266,11 @@ public class Path {
      * @deprecated Need to be implemented.
      */
     public double getMinimumTravelTime() {
-        // TODO:
-        return 0;
+    	double longueurTotaleMin = 0;
+        for (int i=0; i < arcs.size(); i++) {
+        	longueurTotaleMin += arcs.get(i).getMinimumTravelTime();
+        }
+        return longueurTotaleMin;
     }
 
 }
