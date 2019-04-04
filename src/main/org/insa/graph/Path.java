@@ -211,11 +211,31 @@ public class Path {
      * 
      * @return true if the path is valid, false otherwise.
      * 
-     * @deprecated Need to be implemented.
+     * Need to be implemented.
      */
-    public boolean isValid() {
-        // TODO:
-        return false;
+    public boolean isValid() 
+    {
+    	if(this.isEmpty() == true)
+    	{
+    		return true;
+    	}
+    	else if(this.arcs.size() == 1)
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		 int taille = this.arcs.size();
+    		 
+    		 for ( int i = 0; i < taille-2 ; i++)
+    		 {
+    			 if ( arcs.get(i).getDestination()  !=  arcs.get(i+1).getOrigin() ) 
+    			 {
+    				 return false;
+    			 }
+    		 }
+    		 return true;
+    	}      
     }
 
     /**
