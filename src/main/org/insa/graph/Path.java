@@ -34,11 +34,57 @@ public class Path {
      * @deprecated Need to be implemented.
      */
     public static Path createFastestPathFromNodes(Graph graph, List<Node> nodes)
-            throws IllegalArgumentException {
-        List<Arc> arcs = new ArrayList<Arc>();
-        // TODO:
+            throws IllegalArgumentException 
+    {
+    	List<Arc> arcs = new ArrayList<Arc>();
+        Arc ArcMin = null;
+        double min;
+        if (nodes.size() == 0) {
+        	return new Path(graph);
+        }
+        if (nodes.size() == 1) {
+        	return new Path(graph, nodes.get(0));
+        }
+        else
+        {
+        	for(int i = 0; i < (nodes.size())-1; i++)  
+        	{
+        		
+        		List<Arc> ListeArcsNode = nodes.get(i).getSuccessors();
+        		List<Arc> ListeArcsDuBonNode = new ArrayList<Arc>();
+        		for(int y = 0; y < (ListeArcsNode.size()); y++)
+        		{
+        			if(ListeArcsNode.get(y).getDestination() == nodes.get(i+1) ) 
+        			{
+        				ListeArcsDuBonNode.add(ListeArcsNode.get(y));
+        			}
+        		}
+        		if (ListeArcsDuBonNode.size() == 0) 
+                {
+        			throw new IllegalArgumentException("Pas de successeurs");
+                }
+                if (ListeArcsDuBonNode.size() == 1) 
+                {
+                	ArcMin = ListeArcsDuBonNode.get(0);
+                	arcs.add(ArcMin);
+                }
+                else 
+                {
+                	min = ListeArcsDuBonNode.get(0).getMinimumTravelTime();
+            		for(int z = 1; z < (ListeArcsDuBonNode.size()); z++)
+	        		{
+	        			if (ListeArcsDuBonNode.get(z).getMinimumTravelTime() < min ) {
+	        				min = ListeArcsDuBonNode.get(z).getMinimumTravelTime();
+	        				ArcMin = ListeArcsDuBonNode.get(z);
+	        			}
+	        		}
+	        		arcs.add(ArcMin);
+                }
+        	}
+        }
         return new Path(graph, arcs);
     }
+    
 
     /**
      * Create a new path that goes through the given list of nodes (in order),
@@ -55,7 +101,8 @@ public class Path {
      * @deprecated Need to be implemented.
      */
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
-            throws IllegalArgumentException {
+            throws IllegalArgumentException  
+    {
         List<Arc> arcs = new ArrayList<Arc>();
         Arc ArcMin = null;
         float min;
@@ -67,19 +114,22 @@ public class Path {
         }
         else
         {
-        	for(int i = 0; i < (nodes.size()) - 1; i++)  
+        	for(int i = 0; i < (nodes.size())-1; i++)  
         	{
         		
         		List<Arc> ListeArcsNode = nodes.get(i).getSuccessors();
         		List<Arc> ListeArcsDuBonNode = new ArrayList<Arc>();
-        		for(int y = 0; y < (ListeArcsNode.size()) - 1; y++)
+        		for(int y = 0; y < (ListeArcsNode.size()); y++)
         		{
         			if(ListeArcsNode.get(y).getDestination() == nodes.get(i+1) ) 
         			{
         				ListeArcsDuBonNode.add(ListeArcsNode.get(y));
         			}
         		}
-        		
+        		if (ListeArcsDuBonNode.size() == 0) 
+                {
+        			throw new IllegalArgumentException("Pas de successeurs");
+                }
                 if (ListeArcsDuBonNode.size() == 1) 
                 {
                 	ArcMin = ListeArcsDuBonNode.get(0);
@@ -87,9 +137,9 @@ public class Path {
                 }
                 else 
                 {
-            		for(int z = 1; z < (ListeArcsDuBonNode.size()) - 1; z++)
+                	min = ListeArcsDuBonNode.get(0).getLength();
+            		for(int z = 1; z < (ListeArcsDuBonNode.size()); z++)
 	        		{
-	        			min = ListeArcsDuBonNode.get(z).getLength();
 	        			if (ListeArcsDuBonNode.get(z).getLength() < min ) {
 	        				min = ListeArcsDuBonNode.get(z).getLength();
 	        				ArcMin = ListeArcsDuBonNode.get(z);
@@ -99,7 +149,6 @@ public class Path {
                 }
         	}
         }
-        	
         return new Path(graph, arcs);
     }
 
