@@ -34,6 +34,12 @@ public abstract class Arc {
      */
     public abstract float getLength();
 
+   /* public  String  toString() {
+		int idNode1=this.getOrigin().getId();
+		int idNode2=this.getDestination().getId();
+		return ""+idNode1+" - "+idNode2;
+	}
+	*/
     /**
      * Compute the time required to travel this arc if moving at the given speed.
      * 
