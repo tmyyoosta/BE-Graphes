@@ -57,18 +57,48 @@ public class Path {
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
+        Arc ArcMin = null;
+        float min;
         if (nodes.size() == 0) {
-        	return return new Path();
+        	return new Path(graph);
         }
         if (nodes.size() == 1) {
         	return new Path(graph, nodes.get(0));
         }
         else
-        	while(nodes.get(i)) {
-        		nodes.get(i) = 
-        		List<Arc> ListeArcsOrigine
-        		i++;
+        {
+        	for(int i = 0; i < (nodes.size()) - 1; i++)  
+        	{
+        		
+        		List<Arc> ListeArcsNode = nodes.get(i).getSuccessors();
+        		List<Arc> ListeArcsDuBonNode = new ArrayList<Arc>();
+        		for(int y = 0; y < (ListeArcsNode.size()) - 1; y++)
+        		{
+        			if(ListeArcsNode.get(y).getDestination() == nodes.get(i+1) ) 
+        			{
+        				ListeArcsDuBonNode.add(ListeArcsNode.get(y));
+        			}
+        		}
+        		
+                if (ListeArcsDuBonNode.size() == 1) 
+                {
+                	ArcMin = ListeArcsDuBonNode.get(0);
+                	arcs.add(ArcMin);
+                }
+                else 
+                {
+            		for(int z = 1; z < (ListeArcsDuBonNode.size()) - 1; z++)
+	        		{
+	        			min = ListeArcsDuBonNode.get(z).getLength();
+	        			if (ListeArcsDuBonNode.get(z).getLength() < min ) {
+	        				min = ListeArcsDuBonNode.get(z).getLength();
+	        				ArcMin = ListeArcsDuBonNode.get(z);
+	        			}
+	        		}
+	        		arcs.add(ArcMin);
+                }
         	}
+        }
         	
         return new Path(graph, arcs);
     }
@@ -275,7 +305,6 @@ public class Path {
      * 
      * @return Minimum travel time to travel this path (in seconds).
      * 
-     * @deprecated Need to be implemented.
      */
     public double getMinimumTravelTime() {
     	double longueurTotaleMin = 0;
