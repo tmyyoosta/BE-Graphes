@@ -8,11 +8,13 @@ public class Label {
 	private Node nodeFather;
 	private boolean mark;
 	private int cost;
+	private boolean dansLeTas; 
 	
 	public Label(Node n) {
 		this.currentNode = n;
 		this.nodeFather = null;
 		this.mark = false;
+		this.dansLeTas = false;
 		
 	}
 	
