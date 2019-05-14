@@ -3,7 +3,6 @@ package org.insa.algo.utils;
 import org.insa.graph.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.Comparable;
 
 
 public class Label implements Comparable<Label> {
@@ -18,7 +17,7 @@ public class Label implements Comparable<Label> {
 		this.Father = null;
 		this.mark = false;
 		this.dansLeTas = false;
-		
+		this.cost = Double.POSITIVE_INFINITY;
 	}
 	
 	public Node getCurrent() {

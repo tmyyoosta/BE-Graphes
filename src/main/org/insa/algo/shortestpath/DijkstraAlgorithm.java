@@ -41,11 +41,12 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
         notifyOriginProcessed(data.getOrigin());
 
-
+        int nbIteration = 0;
         while (nbNodesUnmarqued != 0 && fin == false) {
-        			//System.out.println("Nombre d'itération : "+nbIteration);
-        			//nbIteration ++;
+        			System.out.println("Nombre d'itération : "+nbIteration);
+        			nbIteration ++;
         			Label label1 = tas.findMin();
+        			
         			tas.deleteMin();
 
         			label1.setMark(true);
@@ -66,7 +67,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         															
         					if (label2.getCost() > newCost) {
         						
-                                //notifyNodeReached(arc.getDestination());
+                                notifyNodeReached(arc.getDestination());
         						
         						
         						if(arc.getDestination() == dest) {
@@ -85,33 +86,34 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         		
          if (labels.get(data.getDestination().getId()) == null) {
         	 	solution = new ShortestPathSolution(data, Status.INFEASIBLE);
-                }
-                else {
-                    ArrayList<Arc> arcs = new ArrayList<>();
-                    
-                    Arc arc = labels.get(data.getDestination().getId()).getFather();
-                    
-                    while (arc != null) {
-                        arcs.add(arc);
-                        Node nodeOrigin = arc.getOrigin();
-                        Label labelOrigin = labels.get(nodeOrigin.getId());
-                        arc = labelOrigin.getFather();
-                    }
+         }
+         else {
+            ArrayList<Arc> arcs = new ArrayList<>();
+            
+            Arc arc = labels.get(data.getDestination().getId()).getFather();
+            
+            while (arc != null) {
+                arcs.add(arc);
+                Node nodeOrigin = arc.getOrigin();
+                Label labelOrigin = labels.get(nodeOrigin.getId());
+                arc = labelOrigin.getFather();
+            }
 
-                    Collections.reverse(arcs);
-                    System.out.println("Nombre d'arc pour le plus court chemin : "+ arcs.size());
-                    Path path = new Path(graph, arcs);
-                    System.out.println("Path travel time = " + path.getMinimumTravelTime()/60.0 + " min");
-                    System.out.println("Path length = " + path.getLength()/1000.0 + " km");
-                    if(path.isValid()) {
-                    	System.out.println("Path is valid");
-                        solution = new ShortestPathSolution(data, Status.OPTIMAL, path);
-                    }else {
-                    	System.out.println("Path not valid");
-                    	solution = null;
-                    	
-                    }
-                }
+            Collections.reverse(arcs);
+            System.out.println("Nombre d'arc pour le plus court chemin : "+ arcs.size());
+            Path path = new Path(graph, arcs);
+            System.out.println("Path travel time = " + path.getMinimumTravelTime()/60.0 + " min");
+            System.out.println("Path length = " + path.getLength()/1000.0 + " km");
+            if(path.isValid()) {
+            	System.out.println("Path is valid");
+                solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(graph, arcs));
+            }
+            else {
+            	System.out.println("Path not valid");
+            	solution = null;
+            	
+            }
+        }
 
         		return solution;
         	}
