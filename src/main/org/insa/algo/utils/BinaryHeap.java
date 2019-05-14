@@ -8,7 +8,7 @@
 // Throws RuntimeException for findMin and deleteMin when empty
 
 package org.insa.algo.utils;
-
+import java.lang.Comparable;
 import java.util.ArrayList;
 
 /**
