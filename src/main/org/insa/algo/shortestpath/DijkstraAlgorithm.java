@@ -22,6 +22,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         ShortestPathSolution solution = null;
         	
         boolean fin = false;
+        boolean possible = true;
         Graph graph = data.getGraph();
 
         List<Node> NodesGraph = graph.getNodes();
@@ -29,9 +30,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
         Node origin = data.getOrigin();
         Node dest  = data.getDestination();
-        int nbNodes = graph.size();
-
-        int nbNodesUnmarqued = nbNodes;
+        
+        int nbNodesUnmarqued = graph.size();
 
         BinaryHeap<Label> tas = new BinaryHeap<Label>();
 
@@ -42,49 +42,60 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         notifyOriginProcessed(data.getOrigin());
 
         int nbIteration = 0;
-        while (nbNodesUnmarqued != 0 && fin == false) {
+        while (!tas.isEmpty() && fin == false && possible == true) {
         			System.out.println("Nombre d'itération : "+nbIteration);
         			nbIteration ++;
         			Label label1 = tas.findMin();
+        			if ( label1.getCost() == Double.POSITIVE_INFINITY)
+        			{
+        				possible = false;
+        				
+        			}
+        			else
+        			{
         			
-        			tas.deleteMin();
+        				tas.deleteMin();
 
-        			label1.setMark(true);
-        			//System.out.println("Cout des labels marques :"+label1.getCost());
-        			//System.out.println("Taille du tas (debut): "+bh.size());
-        			nbNodesUnmarqued--;
+        				label1.setMark(true);
+        				//System.out.println("Cout des labels marques :"+label1.getCost());
+        				//System.out.println("Taille du tas (debut): "+bh.size());
+        				nbNodesUnmarqued--;
         			
-        			for (int i = 0; i < label1.getCurrent().getNumberOfSuccessors(); i++) {	
-        				Arc arc = label1.getCurrent().getSuccessors().get(i);
-        				Node node = arc.getDestination();
-        				Label label2 = labels.get(node.getId());
-        				label2.setCurrent(node);
-        				Label label1bis = labels.get(arc.getOrigin().getId());
+        				for (int i = 0; i < label1.getCurrent().getNumberOfSuccessors(); i++) 
+        				{	
+        					Arc arc = label1.getCurrent().getSuccessors().get(i);
+        					Node node = arc.getDestination();
+        					Label label2 = labels.get(node.getId());
+        					label2.setCurrent(node);
+        					Label label1bis = labels.get(arc.getOrigin().getId());
 
-        				if (label2.isMark() == false) {
+        					if (label2.isMark() == false) 
+        					{
         					
-        					double newCost = label1bis.getCost() + data.getCost(arc);
+        						double newCost = label1bis.getCost() + data.getCost(arc);
         															
-        					if (label2.getCost() > newCost) {
+        						if (label2.getCost() > newCost) 
+        						{
         						
-                                notifyNodeReached(arc.getDestination());
+                                	notifyNodeReached(arc.getDestination());
         						
-        						
-        						if(arc.getDestination() == dest) {
-        							fin = true;
+        							if(label1.getCurrent() == dest) 
+        							{
+        								fin = true;
+        							}
+        							label2.setCost(newCost);
+        							label2.setFather(arc);
+        							tas.insert(label2);
         						}
-        						label2.setCost(newCost);
-        						label2.setFather(arc);
-        						tas.insert(label2);
-        					}
-        				} 
+        					} 
+        				}
         			}
         			//System.out.println("Taille du tas (fin): "+tas.size());
         		}
         		
         		
         		
-         if (labels.get(data.getDestination().getId()) == null) {
+         if (!fin) {
         	 	solution = new ShortestPathSolution(data, Status.INFEASIBLE);
          }
          else {
