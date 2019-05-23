@@ -31,7 +31,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         Node origin = data.getOrigin();
         Node dest  = data.getDestination();
         
-        int nbNodesUnmarqued = graph.size();
+        //int nbNodesUnmarqued = graph.size();
 
         BinaryHeap<Label> tas = new BinaryHeap<Label>();
 
@@ -43,7 +43,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
         int nbIteration = 0;
         while (!tas.isEmpty() && fin == false && possible == true) {
-        			System.out.println("Nombre d'itération : "+nbIteration);
+        			//System.out.println("Nombre d'itération : "+nbIteration);
         			nbIteration ++;
         			Label label1 = tas.findMin();
         			if ( label1.getCost() == Double.POSITIVE_INFINITY)
@@ -58,8 +58,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
         				label1.setMark(true);
         				//System.out.println("Cout des labels marques :"+label1.getCost());
-        				//System.out.println("Taille du tas (debut): "+bh.size());
-        				nbNodesUnmarqued--;
+        				//System.out.println("Taille du tas (debut): "+tas.size());
+        				//nbNodesUnmarqued--;
         			
         				for (int i = 0; i < label1.getCurrent().getNumberOfSuccessors(); i++) 
         				{	
@@ -111,16 +111,16 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             }
 
             Collections.reverse(arcs);
-            System.out.println("Nombre d'arc pour le plus court chemin : "+ arcs.size());
+            //System.out.println("Nombre d'arc pour le plus court chemin : "+ arcs.size());
             Path path = new Path(graph, arcs);
-            System.out.println("Path travel time = " + path.getMinimumTravelTime()/60.0 + " min");
-            System.out.println("Path length = " + path.getLength()/1000.0 + " km");
+            //System.out.println("Path travel time = " + path.getMinimumTravelTime()/60.0 + " min");
+            //System.out.println("Path length = " + path.getLength()/1000.0 + " km");
             if(path.isValid()) {
-            	System.out.println("Path is valid");
+            	//System.out.println("Path is valid");
                 solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(graph, arcs));
             }
             else {
-            	System.out.println("Path not valid");
+            	//System.out.println("Path not valid");
             	solution = null;
             	
             }

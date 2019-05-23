@@ -9,14 +9,14 @@ public class Label implements Comparable<Label> {
 	private Node currentNode;
 	private Arc Father;
 	private boolean mark;
-	private double cost;
-	private boolean dansLeTas; 
+	protected double cost;
+	//private boolean dansLeTas; 
 	
 	public Label(Node n) {
 		this.currentNode = n;
 		this.Father = null;
 		this.mark = false;
-		this.dansLeTas = false;
+		//this.dansLeTas = false;
 		this.cost = Double.POSITIVE_INFINITY;
 	}
 	
@@ -81,5 +81,6 @@ public class Label implements Comparable<Label> {
 		}
 		return ListNodes;
 	}
+	
 	
 }
