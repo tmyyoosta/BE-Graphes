@@ -25,7 +25,6 @@ public class DijkstraTest2 {
 	// type : 0 = temps, 1 = distance
 	public void testScenario(String mapName, int type, int origine, int destination) throws Exception 
 	{
-		//public void testScenario(String mapName, int typeEvaluation, Node origine, Node destination) throws Exception {
 
 		// Create a graph reader.
 		GraphReader reader = new BinaryGraphReader(
@@ -119,19 +118,15 @@ public class DijkstraTest2 {
 	// Verifie que le temps du chemin le plus rapide est inferieur au temps du chemin le plus court
 	// Et verifie que la distance du chemin le plus rapide est superieur a la distance du chemin le plus court
 	public void testScenarioSansOracle(String mapName, int origine, int destination) throws Exception {
-
 		double costFastestSolutionInTime = Double.POSITIVE_INFINITY;
 		double costFastestSolutionInDistance = Double.POSITIVE_INFINITY;
 		double costShortestSolutionInTime = Double.POSITIVE_INFINITY;
 		double costShortestSolutionInDistance = Double.POSITIVE_INFINITY;
-
 		// Create a graph reader.
 		GraphReader reader = new BinaryGraphReader(
 				new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
-
 		// Read the graph.
 		Graph graph = reader.read();
-
 		if (origine<0 || destination<0 || origine>=(graph.size()-1) || destination>=(graph.size()-1)) { // On est hors du graphe. / Sommets inexistants
 			System.out.println("ERREUR : Paramètres invalides ");
 			
@@ -206,5 +201,5 @@ public class DijkstraTest2 {
 		System.out.println();
 	}
 }
-
 ***/
+

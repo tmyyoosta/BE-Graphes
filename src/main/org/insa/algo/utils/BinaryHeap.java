@@ -153,13 +153,13 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     	}
     	else // Si elle n'est pas vide
     	{
-    		index= this.array.indexOf(x); // On cherche l'Ã©lÃ©ment
+    		index= this.array.indexOf(x); // On cherche l'élément
     		
-    		if(index == -1 || index >= this.currentSize ) // Element non trouvÃ© 
+    		if(index == -1 || index >= this.currentSize ) // Element non trouvé 
     		{
     			throw new ElementNotFoundException(x);
     		}
-    		else // ELement trouvÃ©
+    		else // ELement trouvé
     		{
     			dernierIndex = --this.currentSize ;
     			if(dernierIndex > index)

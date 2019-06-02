@@ -362,13 +362,5 @@ public class Path {
         }
         return longueurTotaleMin;
     }
-    
-    public String toString() {
-    	String chaine = "";
-    	for( Arc a : arcs) {
-    		chaine = chaine + " " + a;
-    	}
-    	return chaine; 
-    }
 
 }

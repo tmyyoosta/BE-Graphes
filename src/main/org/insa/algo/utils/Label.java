@@ -9,15 +9,13 @@ public class Label implements Comparable<Label> {
 	private Node currentNode;
 	private Arc Father;
 	private boolean mark;
-	protected double cost;
-	//private boolean dansLeTas; 
+	private double cost; 
 	
 	public Label(Node n) {
 		this.currentNode = n;
 		this.Father = null;
 		this.mark = false;
-		//this.dansLeTas = false;
-		this.cost = Double.POSITIVE_INFINITY;
+		this.cost = Double.MAX_VALUE;
 	}
 	
 	public Node getCurrent() {
@@ -45,7 +43,7 @@ public class Label implements Comparable<Label> {
 	}
 
 	public void setMark(boolean a) {
-		this.mark = true;
+		this.mark = a;
 	}
 	
 	public boolean isMark() {
@@ -53,21 +51,20 @@ public class Label implements Comparable<Label> {
 	}
 	
 	
-	/* Compare le co√ªts des labels entre eux */
-	public int compareTo(Label autre) {
-		int resultat;
-		if(this.getCost() < autre.getCost()) {
-			resultat = -1;
+	/* Compare le co˚ts des labels entre eux */
+	public int compareTo (Label autre) {
+		double cost = this.getTotalCost() - autre.getTotalCost();
+		if ( cost == 0 ) 
+		{
+			cost = (this.getTotalCost() - this.getCost()) - (autre.getTotalCost() - autre.getCost());
 		}
-		else if (this.getCost() == autre.getCost()) {
-			resultat = 0;
-		}
-		else {
-			resultat = 1; 
-		}
-		return resultat;
+		return (int) cost;
 	}
 	
+	public double getTotalCost()
+	{
+		return this.getCost();
+	}
 	
 	
 	
@@ -81,6 +78,4 @@ public class Label implements Comparable<Label> {
 		}
 		return ListNodes;
 	}
-	
-	
 }
