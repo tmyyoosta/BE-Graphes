@@ -12,7 +12,7 @@ import org.insa.algo.shortestpath.ShortestPathSolution;
 
 public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 	
-	protected int NbNodeMark;
+	public int NbNodeMark;
 
     public DijkstraAlgorithm(ShortestPathData data) {
         super(data);
@@ -20,7 +20,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     }
 
     @Override
-    protected ShortestPathSolution doRun() {
+    public ShortestPathSolution doRun() {
     	
         ShortestPathData data = getInputData();
         ShortestPathSolution solution = null;

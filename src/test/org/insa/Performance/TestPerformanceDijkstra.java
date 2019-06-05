@@ -1,9 +1,10 @@
-package org.insa.algo.shortestpath;
+package org.insa.Performance;
 
 import org.insa.graph.*;
 import org.insa.algo.*;
-
-
+import org.insa.algo.shortestpath.AStarAlgorithm;
+import org.insa.algo.shortestpath.DijkstraAlgorithm;
+import org.insa.algo.shortestpath.ShortestPathData;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;

@@ -24,7 +24,7 @@ public class AStarAlgorithm extends DijkstraAlgorithm
         this.NbNodeMark = 0;
     }
 
-    protected ShortestPathSolution doRun() {
+    public ShortestPathSolution doRun() {
         ShortestPathData data = getInputData();
         ShortestPathSolution solution = null;
         	

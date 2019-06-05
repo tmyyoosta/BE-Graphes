@@ -127,7 +127,7 @@ public class DijkstraTest {
 
 	@Test
 	public void testDistance() throws Exception {
-		String mapName = "C:\\Users\\yimek\\Downloads\\carre-dense.mapgr";
+		String mapName = "C:\\Users\\Thomas\\Downloads\\toulouse.mapgr";
 
 		DijkstraTest2 test = new  DijkstraTest2();
 		int origine;
@@ -136,14 +136,14 @@ public class DijkstraTest {
 		System.out.println("Test de validité avec oracle sur une carte   -   Mode : DISTANCE");
 		System.out.println();
 		
-		System.out.println("	Cas d'un chemin nul");
-		origine = 0 ;
-		destination = 0;
+		System.out.println("	Cas avec des sommets non connexes ");
+		origine = 115402 ;
+		destination = 420148;
 		test.testScenario(mapName, 1,origine,destination);    
 		
-		System.out.println("	Cas d'un chemin simple ");
-		origine = 1032;
-		destination = 10534;
+		System.out.println("	Cas d'un chemin simple - Carte : Toulouse ");
+		origine = 7946;
+		destination = 5090;
 		test.testScenario(mapName, 1,origine,destination);    	
 	
 		
@@ -154,35 +154,35 @@ public class DijkstraTest {
 
 		System.out.println("	Cas de sommets inexistants - Destination invalide");
 		origine = 1000;
-		destination = -1;
+		destination = 200000000;
 		test.testScenario(mapName, 1,origine,destination);    	
 		
 		System.out.println("	Cas de sommets inexistants - Origine & Destination invalide");
 		origine = -1;
-		destination = -254;
+		destination = 2000000000;
 		test.testScenario(mapName, 1,origine,destination);    	
 	}
 
 	
 	@Test
 	public void testTemps() throws Exception {
-		String mapName = "C:\\Users\\yimek\\Downloads\\carre-dense.mapgr";
+		String mapName = "C:\\Users\\Thomas\\Downloads\\toulouse.mapgr";
 
 		DijkstraTest2 test = new  DijkstraTest2();
 		int origine;
 		int destination;
 		
-		System.out.println("Test de validité avec oracle sur une carte- Mode : TEMPS");
+		System.out.println("Test de validité avec oracle sur une carte - Mode : TEMPS");
 		System.out.println();
 		
-		System.out.println("	Cas d'un chemin nul ");
-		origine = 0 ;
-		destination = 0;
+		System.out.println("	Cas d'un chemin impossible ");
+		origine = 100 ;
+		destination = 100;
 		test.testScenario(mapName, 0,origine,destination);    
 		
-		System.out.println("	Cas d'un chemin simple");
-		origine = 1032;
-		destination = 10534;
+		System.out.println("	Cas d'un chemin simple - Carte : Toulouse");
+		origine = 7946;
+		destination = 5090;
 		test.testScenario(mapName, 0,origine,destination);    	
 	
 		System.out.println("	Cas de sommets inexistants - Origine invalide");
